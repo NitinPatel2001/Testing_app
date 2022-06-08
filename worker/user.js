@@ -1,4 +1,3 @@
-const async = require('hbs/lib/async')
 const {users} = require('../db/model')
 
 async function addname(k){

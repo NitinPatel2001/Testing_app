@@ -1,6 +1,5 @@
 const express = require('express')
 const path = require('path')
-const res = require('express/lib/response')
 const app = express()
 
 const {Routeuser} = require('./Routes/addname')

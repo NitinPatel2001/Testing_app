@@ -1,16 +1,30 @@
 const Router = require('express')
 const route = Router()
-
-const {addname,showallusers} = require('../worker/user')
+const {List} = require('../db/model')
 
 route.get('/',async (req,res)=>{
-    const user = await showallusers()
-    res.send(user)
+    await List.find()
+    .then((results)=>{
+        res.send(results)
+    })
+    .catch((err)=>{
+        console.log(err)
+    })
 })
 
 route.post('/',async (req,res)=>{
-    const user = await addname(req.body.name)
-    res.send(user)
+    const k = req.body.name
+    const name = await List({
+        name: k
+    })
+    
+    name.save()
+    .then((result)=>{
+        res.send(k)
+    })
+    .catch((err)=>{
+        console.error(err)
+    })
 })
 
 exports = module.exports = {
